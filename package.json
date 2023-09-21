@@ -1,0 +1,25 @@
+{
+  "name": "server_js_tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/hono_server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "devh": "nodemon src/hono/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hono/node-server": "^1.1.1",
+    "better-sqlite3": "^8.6.0",
+    "elysia": "^0.6.23",
+    "express": "^4.18.2",
+    "hono": "^3.6.3",
+    "hyper-express": "^6.8.5",
+    "live-directory": "^3.0.3",
+    "mini-van-plate": "^0.4.0",
+    "sqlite3": "^5.1.6"
+  }
+}
