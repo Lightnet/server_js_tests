@@ -4,7 +4,7 @@
  * work in progress
  * hono js server current testing...
 
-# Dev Information:
+# Information:
   This for testing framework servers.
 
   Using web server frame build. For sandbox testing.

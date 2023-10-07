@@ -72,6 +72,7 @@ app.route('/', blog);
 //<script type="module" src="/vanjs_client.js"></script>
 //<script type="module" src="/solid_client.js"></script>
 //<script type="module" src="/preact_client.js"></script>
+//<script type="module" src="/vanjs_client.js"></script>
 app.get('/', (c) => {
   const db = c.get('db');
   //console.log('db', db);
@@ -89,7 +90,7 @@ app.get('/', (c) => {
       </style>
     </head>
     <body>
-      <script type="module" src="/vanjs_client.js"></script>
+      <script type="module" src="/van_three.js"></script>
     </body>
   </html>
   `;

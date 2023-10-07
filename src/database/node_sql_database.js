@@ -101,6 +101,45 @@ class SQLDB{
       return {api:'DBERROR'};
     }
   }
+
+
+  //===================================
+  // entity
+  //===================================
+  //
+  entity_create(_title,_content){
+    const stmt = this.db.prepare('INSERT INTO entity (title, content) VALUES (?, ?)');
+    stmt.run(_title, _content);
+    return {api:"CREATED"};
+  }
+
+  get_entities(){
+    let stmt = this.db.prepare(`SELECT * FROM entity;`);
+    const result = stmt.all();
+    //console.log(result);
+    return result;
+  }
+
+  entity_delete(_id){
+    try{
+      const stmt = this.db.prepare('DELETE FROM entity WHERE id=?')
+      stmt.run(_id);
+      return {api:'DELETE'};
+    }catch(e){
+      return {api:'DBERROR'};
+    }
+  }
+
+  entity_update(_id,_title,_content){
+    try{
+      const stmt = this.db.prepare('UPDATE entity SET title=?, content=? WHERE id=?;')
+      stmt.run(_title, _content, _id);
+      return {api:'UPDATE'};
+    }catch(e){
+      console.log(e)
+      return {api:'DBERROR'};
+    }
+  }
 }
 
 export default SQLDB;
