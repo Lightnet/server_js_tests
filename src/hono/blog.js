@@ -45,7 +45,6 @@ route.delete('/api/blog/:id',(c)=>{
   console.log("result: ",result)
   //console.log(db);
 
-
   return c.json(result);
 })
 

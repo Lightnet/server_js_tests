@@ -7,6 +7,27 @@ const ForumEL = () => {
   )
 }
 
+const BoardEL = () => {
+
+  return div(
+
+  )
+}
+
+const TopicEL = () => {
+
+  return div(
+
+  )
+}
+
+const CommentEL = () => {
+
+  return div(
+
+  )
+}
+
 export {
   ForumEL
 }
