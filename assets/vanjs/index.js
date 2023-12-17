@@ -9,7 +9,7 @@ import AboutEl from "./about.js";
 import { BlogEL } from "./blog.js";
 import { AccountEL } from "./account.js";
 import { MessageEL } from "./message.js";
-import { ForumEL } from "./forum.js";
+import { ForumPageEL } from "./forum.js";
 import { GameEL } from "./game.js";
 import { SettingsEL } from "./settings.js";
 
@@ -42,7 +42,8 @@ const NoneEL = () => {
 }
 
 const IndexEL = () => {
-  const view = van.state('home');
+  //const view = van.state('home');
+  const view = van.state('forum');
   //const content = div({id:'content'});
 
   const content = van.derive(()=>{
@@ -63,7 +64,7 @@ const IndexEL = () => {
       //van._mount(content,MessageEL);
     }
     if(view.val=='forum'){
-      return ForumEL();
+      return ForumPageEL();
       //van._mount(content,ForumEL);
     }
     if(view.val=='game'){

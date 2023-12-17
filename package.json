@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "devh": "nodemon src/hono/server.js",
+    "devh": "nodemon src/hono/server.js --ignore ./assets",
     "deve": "bun run src/elysia/server.js"
   },
   "keywords": [],
@@ -15,12 +15,15 @@
   "dependencies": {
     "@hono/node-server": "^1.1.1",
     "better-sqlite3": "^8.6.0",
+    "dotenv": "^16.3.1",
     "elysia": "^0.7.5",
     "express": "^4.18.2",
     "hono": "^3.6.3",
     "hyper-express": "^6.8.5",
     "live-directory": "^3.0.3",
-    "mini-van-plate": "^0.4.0",
+    "mini-van-plate": "^0.4.2",
+    "nodemailer": "^6.9.6",
+    "smtp-server": "^3.13.0",
     "sqlite3": "^5.1.6"
   }
 }

@@ -5,7 +5,7 @@ import { Hono } from 'hono';
 const route = new Hono();
 route.get('/api/forum',(c)=>{
   const db = c.get('db');
-  const results = db.get_blogs();
+  const results = db.get_forums();
   //console.log(results);
   return c.json(results);
 })
@@ -15,7 +15,7 @@ route.post('/api/forum', async(c)=>{
   const db = c.get('db');
   //console.log(data);
 
-  const results = db.blog_create(data.title,data.content);
+  const results = db.forum_create(data.title,data.content);
   console.log("results");
   console.log(results);
 
@@ -30,7 +30,7 @@ route.put('/api/forum/:id',async (c)=>{
     console.log("data update... id: ", id);
     console.log(data);
     const db = c.get('db');
-    const result = db.blog_update(id, data.title,data.content);
+    const result = db.forum_update(id, data.title,data.content);
     return c.json(result);
   }
   
@@ -41,7 +41,7 @@ route.delete('/api/forum/:id',(c)=>{
   const id = c.req.param('id');
   console.log('ID: ', id);
   const db = c.get('db');
-  const result = db.blog_delete(id);
+  const result = db.forum_delete(id);
   console.log("result: ",result)
   //console.log(db);
   

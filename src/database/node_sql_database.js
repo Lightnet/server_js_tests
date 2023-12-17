@@ -7,6 +7,7 @@ class SQLDB{
   constructor(){
     this.initDB();
     //this.blog_create_table()
+    //this.forum_create_table()
     return this;
   }
 
@@ -30,6 +31,16 @@ class SQLDB{
 
   async blog_create_table(){
     await this.db.exec(`CREATE TABLE IF NOT EXISTS blog (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      aliasId varchar(255),
+      title varchar(255) NOT NULL,
+      content varchar(255) NOT NULL,
+      create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );`);
+  }
+
+  async forum_create_table(){
+    await this.db.exec(`CREATE TABLE IF NOT EXISTS forum (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       aliasId varchar(255),
       title varchar(255) NOT NULL,
@@ -94,6 +105,43 @@ class SQLDB{
   blog_update(_id,_title,_content){
     try{
       const stmt = this.db.prepare('UPDATE blog SET title=?, content=? WHERE id=?;')
+      stmt.run(_title, _content, _id);
+      return {api:'UPDATE'};
+    }catch(e){
+      console.log(e)
+      return {api:'DBERROR'};
+    }
+  }
+
+
+  //=============================================
+  // FORUM
+  get_forums(){
+    let stmt = this.db.prepare(`SELECT * FROM forum;`);
+    const result = stmt.all();
+    //console.log(result);
+    return result;
+  }
+
+  forum_create(_title,_content){
+    const stmt = this.db.prepare('INSERT INTO forum (title, content) VALUES (?, ?)');
+    stmt.run(_title, _content);
+    return {api:"CREATED"};
+  }
+
+  forum_delete(_id){
+    try{
+      const stmt = this.db.prepare('DELETE FROM forum WHERE id=?')
+      stmt.run(_id);
+      return {api:'DELETE'};
+    }catch(e){
+      return {api:'DBERROR'};
+    }
+  }
+
+  forum_update(_id,_title,_content){
+    try{
+      const stmt = this.db.prepare('UPDATE forum SET title=?, content=? WHERE id=?;')
       stmt.run(_title, _content, _id);
       return {api:'UPDATE'};
     }catch(e){

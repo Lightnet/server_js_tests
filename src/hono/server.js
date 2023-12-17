@@ -4,6 +4,7 @@
 // 
 // 
 import { serve } from '@hono/node-server';
+import van from "mini-van-plate/van-plate"
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
 import { html } from 'hono/html';
@@ -39,6 +40,7 @@ export function useDB(options){
 const db = new SQLDB();
 
 const PORT = process.env.PORT || 3000;
+const {head, a, body, style, script, button, input, li, p, ul} = van.tags
 
 // Web Fetch Server
 const app = new Hono({ 
@@ -77,6 +79,24 @@ app.get('/', (c) => {
   const db = c.get('db');
   //console.log('db', db);
   //return c.text('Hono!')
+  const pageHtml = van.html(
+    head(
+      style(`
+      body{
+        background:gray;
+        margin: 0px 0px 0px 0px;
+        overflow: hidden;
+      }
+      `)
+    ),
+    body(
+      //p("Your user-agent is: ", req.headers["user-agent"] ?? "Unknown"),
+      //p("👋Hello"),
+      script({type:"module",src:"/vanjs_client.js"})
+    ),
+  );
+
+  /*
   const pageHtml = html`
   <!doctype html>
   <html lang="en">
@@ -92,12 +112,73 @@ app.get('/', (c) => {
       </style>
     </head>
     <body>
-      <script type="module" src="/van_three.js"></script>
+      <script type="module" src="/vanjs_client.js"></script>
     </body>
   </html>
   `;
+  */
   return c.html(pageHtml);
-})
+});
+
+app.get('/spacemobile', (c) => {
+  const db = c.get('db');
+  const pageHtml = van.html(
+    head(
+      style(`
+      body{
+        background:gray;
+        margin: 0px 0px 0px 0px;
+        overflow: hidden;
+      }
+      `)
+    ),
+    body(
+      script({type:"module",src:"/van_spacemobile.js"})
+    ),
+  );
+  return c.html(pageHtml);
+});
+
+app.get('/craftmobile', (c) => {
+  const db = c.get('db');
+  const pageHtml = van.html(
+    head(
+      style(`
+      body{
+        background:gray;
+        margin: 0px 0px 0px 0px;
+        overflow: hidden;
+      }
+      `)
+    ),
+    body(
+      script({src:"https://unpkg.com/three@0.157.0/examples/jsm/libs/ammo.wasm.js"}),
+      script({type:"module",src:"/van_craftmobile.js"})
+    ),
+  );
+  return c.html(pageHtml);
+});
+
+app.get('/craftrapier', (c) => {
+  //const db = c.get('db');
+  console.log("/craftrapier");
+  const pageHtml = van.html(
+    head(
+      style(`
+      body{
+        background:gray;
+        margin: 0px 0px 0px 0px;
+        overflow: hidden;
+      }
+      `)
+    ),
+    body(
+      //script({src:"https://unpkg.com/three@0.157.0/examples/jsm/libs/ammo.wasm.js"}),
+      script({type:"module",src:"/van_craftrapier.js"})
+    ),
+  );
+  return c.html(pageHtml);
+});
 
 //set up static folder for public access
 app.use('/*', serveStatic({ root: './assets' }));
@@ -119,6 +200,8 @@ if(typeServer=='node'){
   });
   console.log('Process Type:',typeServer)
   console.log(`hono server  http://localhost:${PORT}`)
+  console.log(`hono server  http://localhost:${PORT}/craftmobile`)
+  console.log(`hono server  http://localhost:${PORT}/craftrapier`)
 }
 
 export default app

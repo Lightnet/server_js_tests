@@ -4,3 +4,4 @@ package-lock.json
 database.sqlite
 bun.lockb
 
+.env
