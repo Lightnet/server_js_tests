@@ -125,7 +125,7 @@ class CraftMobile extends TriEngine{
 
   createGroundBlock(){
     let pos = {x: 0, y: -1, z: 0};
-    let scale = {x: 50, y: 2, z: 50};
+    let scale = {x: 10, y: 0.1, z: 10};
     let quat = {x: 0, y: 0, z: 0, w: 1};
     let mass = 0;
 
